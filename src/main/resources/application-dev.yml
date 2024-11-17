@@ -6,7 +6,7 @@ MYSQL_PORT: 19565
 MYSQL_DATABASE: railway
 
 #Server config
-CONTAINER_PORT: ${PORT}
+#CONTAINER_PORT: ${PORT}
 ACTIVE_PROFILE: dev
 
 #Email config
