@@ -1,0 +1,72 @@
+
+spring :
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://root:${MYSQL_PASSWORD}@junction.proxy.rlwy.net:${MYSQL_PORT}/${MYSQL_DATABASE}
+
+    username: root
+    password: MqyxActyfqlhSEGhUFFCMtbBOIyesbtm
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      database: mysql
+      database-platform: org.hibernate.dialect.MySQLDialect
+      show-sql: true
+
+
+  sql:
+    init:
+      mode: never
+      continue-on-error: false
+      schema-locations: classpath:/data/schema.sql
+      data-locations: classpath:/data/data.sql
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_ID}
+    password: ${EMAIL_PASSWORD}
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          charset: UTF
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    verify:
+      host: ${VERIFY_EMAIL_HOST}
+
+server:
+  port: ${CONTAINER_PORT}
+  error:
+    path: /user/error
+    whitelabel:
+      enabled: false
+
+jwt:
+  expiration: ${JWT_EXPIRATION}
+  secret: ${JWT_SECRET}
+
+
+aws:
+  s3:
+    access:
+      key: ${AWS_ACCESS_KEY}
+    secret:
+      key: ${AWS_SECRET_KEY}

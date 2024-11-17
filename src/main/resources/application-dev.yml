@@ -1,0 +1,22 @@
+
+MYSQL_USERNAME: root
+MYSQL_PASSWORD: MqyxActyfqlhSEGhUFFCMtbBOIyesbtm
+MYSQL_HOST: mysql.railway.internal
+MYSQL_PORT: 19565
+MYSQL_DATABASE: railway
+
+#Server config
+CONTAINER_PORT: ${PORT}
+ACTIVE_PROFILE: dev
+
+#Email config
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ID: marckenlygbeau@gmail.com
+EMAIL_PASSWORD: cxmjrheikeieobqv
+VERIFY_EMAIL_HOST: https://plusmedical.netlify.app
+
+
+
+JWT_EXPIRATION: 432_000_000
+JWT_SECRET: ${SECRET}

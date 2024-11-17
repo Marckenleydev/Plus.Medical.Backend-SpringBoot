@@ -1,0 +1,17 @@
+
+MYSQL_USERNAME: user
+MYSQL_PASSWORD: petitphat1
+MYSQL_HOST: 172.18.0.2
+MYSQL_PORT: 3306
+MYSQL_DATABASE: doctor_booking_appointment
+
+#Server config
+CONTAINER_PORT: ${PORT}
+ACTIVE_PROFILE: prod
+
+#Email config
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ID: marckenlygbeau@gmail.com
+EMAIL_PASSWORD: cxmjrheikeieobqv
+VERIFY_EMAIL_HOST: http://localhost:8000
