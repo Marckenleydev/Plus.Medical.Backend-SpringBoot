@@ -53,7 +53,7 @@ spring :
       host: ${VERIFY_EMAIL_HOST}
 
 server:
-  port: ${CONTAINER_PORT}
+  #port: ${CONTAINER_PORT}
   error:
     path: /user/error
     whitelabel:
