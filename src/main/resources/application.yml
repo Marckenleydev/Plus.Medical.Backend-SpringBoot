@@ -4,7 +4,7 @@ spring :
     active: ${ACTIVE_PROFILE:dev}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://root:${MYSQL_PASSWORD}@junction.proxy.rlwy.net:${MYSQL_PORT}/${MYSQL_DATABASE}
+    url: jdbc:mysql://root:MqyxActyfqlhSEGhUFFCMtbBOIyesbtm@junction.proxy.rlwy.net:19565/railway
 
     username: root
     password: MqyxActyfqlhSEGhUFFCMtbBOIyesbtm
@@ -53,7 +53,7 @@ spring :
       host: ${VERIFY_EMAIL_HOST}
 
 server:
-  #port: ${CONTAINER_PORT}
+  port: ${CONTAINER_PORT}
   error:
     path: /user/error
     whitelabel:
