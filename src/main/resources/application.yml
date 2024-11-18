@@ -24,12 +24,6 @@ spring :
       schema-locations: classpath:/data/schema.sql
       data-locations: classpath:/data/data.sql
 
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 1000MB
-      max-request-size: 1000MB
-
 
   mail:
     host: ${EMAIL_HOST}
