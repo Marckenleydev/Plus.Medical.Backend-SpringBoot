@@ -8,7 +8,7 @@ MYSQL_DATABASE: railway
 #Server config
 #CONTAINER_PORT: ${PORT}
 ACTIVE_PROFILE: dev
-
+MYSQL_DATABASE_URL: ${DATABASE_URL}
 #Email config
 EMAIL_HOST: smtp.gmail.com
 EMAIL_PORT: 587
