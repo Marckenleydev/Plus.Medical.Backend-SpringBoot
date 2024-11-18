@@ -4,7 +4,7 @@ spring :
     active: ${ACTIVE_PROFILE:dev}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MYSQL_DATABASE_URL}
+    url: jdbc:mysql://root:MqyxActyfqlhSEGhUFFCMtbBOIyesbtm@junction.proxy.rlwy.net:19565/railway
 
     username: root
     password: MqyxActyfqlhSEGhUFFCMtbBOIyesbtm
