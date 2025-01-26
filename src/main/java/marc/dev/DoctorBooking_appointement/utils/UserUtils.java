@@ -15,7 +15,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class UserUtils {
 
-    public static PatientEntity createPatientEntity(String firstName, String lastName, String email,String imageUrl, RoleEntity role) {
+    public static PatientEntity createPatientEntity(String firstName, String lastName, String email, RoleEntity role) {
         return PatientEntity.builder()
                 .userId(UUID.randomUUID().toString())
                 .patientId(UUID.randomUUID().toString())
@@ -29,7 +29,7 @@ public class UserUtils {
                 .loginAttempts(0)
                 .phone(EMPTY)
                 .medical_history(EMPTY)
-                .imageUrl(imageUrl)
+                .imageUrl("https://cdn-icons-png.flaticon.com/512/149/149071.png")
                 .role(role)
                 .build();
     }

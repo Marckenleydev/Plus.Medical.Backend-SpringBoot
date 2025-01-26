@@ -55,15 +55,14 @@ public class PatientServiceImpl implements PatientService {
     private final CloudinaryService cloudinaryService;
 
     @Override
-    public void createPatient(String firstName, String lastName, String email, String password,MultipartFile patientImageUrl) {
+    public void createPatient(String firstName, String lastName, String email, String password) {
         var patient = patientRepository.findByEmailIgnoreCase(email);
 
         if(patient.isPresent()){
             throw new ApiException("Email already exists. Use a different email and try again");
         }
-        String imageUrl = cloudinaryService.uploadFile(patientImageUrl, "Plus-Medical-Images");
 
-        var patientEntity = patientRepository.save(createNewPatient(firstName, lastName, email, imageUrl));
+        var patientEntity = patientRepository.save(createNewPatient(firstName, lastName, email));
         var credentialEntity = new CredentialEntity(patientEntity, encoder.encode(password));
         credentialRepository.save(credentialEntity);
 
@@ -255,8 +254,8 @@ public class PatientServiceImpl implements PatientService {
         return patientByEmail.orElseThrow(() -> new ApiException("User not found"));
     }
 
-    private PatientEntity createNewPatient(String firstName, String lastName, String email, String imageUrl){
+    private PatientEntity createNewPatient(String firstName, String lastName, String email){
         var role = getRoleName(Authority.PATIENT.name());
-        return createPatientEntity(firstName, lastName, email,imageUrl, role);
+        return createPatientEntity(firstName, lastName, email, role);
     }
 }
