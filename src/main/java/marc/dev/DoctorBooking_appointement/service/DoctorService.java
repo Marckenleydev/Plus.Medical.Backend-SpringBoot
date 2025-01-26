@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface DoctorService {
-    void createDoctor(String firstName, String lastName, String email, String password,String specialisationName);
+    void createDoctor(String firstName, String lastName, String email, String password,String specialisationName, MultipartFile imageUrl);
     RoleEntity getRoleName(String name);
     void verifyAccount(String token);
     void updateLoginAttempt(String email, LoginType loginType);

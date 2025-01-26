@@ -35,13 +35,13 @@ public class StaffController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Response> savePatient(@RequestBody @Valid UserRequest user, HttpServletRequest request) {
+    public ResponseEntity<Response> savePatient(@ModelAttribute @Valid UserRequest user, HttpServletRequest request) {
         System.out.println("Entering savePatient method");
 
         System.out.println(user.getFirstName());
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
-        staffService.createStaff(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        staffService.createStaff(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),user.getImageUrl());
 
 
         return ResponseEntity.created(getUri()).body(getResponse(request, emptyMap(), "Account created. Check your email to enable your account.", CREATED));

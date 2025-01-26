@@ -12,7 +12,7 @@ import static java.time.LocalDateTime.now;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class StaffUtils {
-    public static StaffEntity createStaffEntity(String firstName, String lastName, String email, RoleEntity role) {
+    public static StaffEntity createStaffEntity(String firstName, String lastName, String email,String imageUrl, RoleEntity role) {
 
         return StaffEntity.builder()
                 .userId(UUID.randomUUID().toString())
@@ -26,7 +26,7 @@ public class StaffUtils {
                 .enabled(false)
                 .loginAttempts(0)
                 .phone(EMPTY)
-                .imageUrl("https://cdn-icons-png.flaticon.com/512/149/149071.png")
+                .imageUrl(imageUrl)
                 .role(role)
                 .build();
 

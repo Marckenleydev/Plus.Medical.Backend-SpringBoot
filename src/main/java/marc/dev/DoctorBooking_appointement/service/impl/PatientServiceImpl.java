@@ -20,6 +20,7 @@ import marc.dev.DoctorBooking_appointement.repository.ConfirmationRepository;
 import marc.dev.DoctorBooking_appointement.repository.CredentialRepository;
 import marc.dev.DoctorBooking_appointement.repository.PatientRepository;
 import marc.dev.DoctorBooking_appointement.repository.RoleRepository;
+import marc.dev.DoctorBooking_appointement.service.CloudinaryService;
 import marc.dev.DoctorBooking_appointement.service.PatientService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -51,16 +52,18 @@ public class PatientServiceImpl implements PatientService {
     private final BCryptPasswordEncoder encoder;
     private final CacheStore<String, Integer> userCache;
     private final ApplicationEventPublisher publisher;
+    private final CloudinaryService cloudinaryService;
 
     @Override
-    public void createPatient(String firstName, String lastName, String email, String password) {
+    public void createPatient(String firstName, String lastName, String email, String password,MultipartFile patientImageUrl) {
         var patient = patientRepository.findByEmailIgnoreCase(email);
 
         if(patient.isPresent()){
             throw new ApiException("Email already exists. Use a different email and try again");
         }
+        String imageUrl = cloudinaryService.uploadFile(patientImageUrl, "Plus-Medical-Images");
 
-        var patientEntity = patientRepository.save(createNewPatient(firstName, lastName, email));
+        var patientEntity = patientRepository.save(createNewPatient(firstName, lastName, email, imageUrl));
         var credentialEntity = new CredentialEntity(patientEntity, encoder.encode(password));
         credentialRepository.save(credentialEntity);
 
@@ -252,8 +255,8 @@ public class PatientServiceImpl implements PatientService {
         return patientByEmail.orElseThrow(() -> new ApiException("User not found"));
     }
 
-    private PatientEntity createNewPatient(String firstName, String lastName, String email){
+    private PatientEntity createNewPatient(String firstName, String lastName, String email, String imageUrl){
         var role = getRoleName(Authority.PATIENT.name());
-        return createPatientEntity(firstName, lastName, email, role);
+        return createPatientEntity(firstName, lastName, email,imageUrl, role);
     }
 }

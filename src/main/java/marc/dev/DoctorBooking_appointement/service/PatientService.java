@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface PatientService {
-    void createPatient(String firstName, String lastName, String email, String password);
+    void createPatient(String firstName, String lastName, String email, String password, MultipartFile imageUrl);
     RoleEntity getRoleName(String name);
     void verifyAccount(String token);
     void updateLoginAttempt(String email, LoginType loginType);

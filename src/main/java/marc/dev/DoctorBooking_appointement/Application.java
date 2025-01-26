@@ -46,15 +46,15 @@ public class  Application {
 
 
 
-			var userRole = new RoleEntity();
-			userRole.setName(Authority.USER.name());
-			userRole.setAuthorities(Authority.USER);
-			roleRepository.save(userRole);
+			var patientRole = new RoleEntity();
+			patientRole.setName(Authority.PATIENT.name());
+			patientRole.setAuthorities(Authority.PATIENT);
+			roleRepository.save(patientRole);
 
-			var managerRole = new RoleEntity();
-			managerRole.setName(Authority.MANAGER.name());
-			managerRole.setAuthorities(Authority.MANAGER);
-			roleRepository.save(managerRole);
+			var doctorRole = new RoleEntity();
+			doctorRole.setName(Authority.DOCTOR.name());
+			doctorRole.setAuthorities(Authority.DOCTOR);
+			roleRepository.save(doctorRole);
 			RequestContext.start();
 
 			var adminRole = new RoleEntity();
@@ -63,10 +63,10 @@ public class  Application {
 			roleRepository.save(adminRole);
 			RequestContext.start();
 
-			var superAdminRole = new RoleEntity();
-			superAdminRole.setName(Authority.SUPER_ADMIN.name());
-			superAdminRole.setAuthorities(Authority.SUPER_ADMIN);
-			roleRepository.save(superAdminRole);
+			var staffRole = new RoleEntity();
+			staffRole.setName(Authority.STAFF.name());
+			staffRole.setAuthorities(Authority.STAFF);
+			roleRepository.save(staffRole);
 			RequestContext.start();
 
 			 */

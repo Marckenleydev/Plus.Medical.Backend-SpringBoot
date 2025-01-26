@@ -15,6 +15,7 @@ import marc.dev.DoctorBooking_appointement.enumeration.LoginType;
 import marc.dev.DoctorBooking_appointement.event.DoctorEvent;
 import marc.dev.DoctorBooking_appointement.exception.ApiException;
 import marc.dev.DoctorBooking_appointement.repository.*;
+import marc.dev.DoctorBooking_appointement.service.CloudinaryService;
 import marc.dev.DoctorBooking_appointement.service.DoctorService;
 import marc.dev.DoctorBooking_appointement.utils.FeedbackUtils;
 import org.springframework.context.ApplicationEventPublisher;
@@ -50,13 +51,15 @@ public class DoctorServiceImpl implements DoctorService {
     private final CacheStore<String, Integer> userCache;
     private final ApplicationEventPublisher publisher;
     private final SpecialisationRepository specialisationRepository;
-    public void createDoctor(String firstName, String lastName, String email, String password, String specialisationName) {
+    private final CloudinaryService cloudinaryService;
+    public void createDoctor(String firstName, String lastName, String email, String password, String specialisationName,MultipartFile doctorImageUrl) {
         var doctor = doctorRepository.findByEmailIgnoreCase(email);
         if(doctor.isPresent()){
             throw new ApiException("Email already exists. Use a different email and try again");
 
         }
-        var doctorEntity = doctorRepository.save(createNewDoctor(firstName, lastName, email, specialisationName));
+        String imageUrl = cloudinaryService.uploadFile(doctorImageUrl, "Plus-Medical-Images");
+        var doctorEntity = doctorRepository.save(createNewDoctor(firstName, lastName, email, specialisationName, imageUrl));
         var credentialEntity = new CredentialEntity(doctorEntity, encoder.encode(password));
         credentialRepository.save(credentialEntity);
         var confirmationEntity = new ConfirmationEntity(doctorEntity);
@@ -258,9 +261,9 @@ public class DoctorServiceImpl implements DoctorService {
         var doctorByUserId = doctorRepository.findDoctorByUserId(userId);
         return doctorByUserId.orElseThrow(() -> new ApiException("User not found"));
     }
-    private DoctorEntity createNewDoctor(String firstName, String lastName, String email,String specialisationName){
+    private DoctorEntity createNewDoctor(String firstName, String lastName, String email, String specialisationName,String imageUrl){
         var role = getRoleName(Authority.DOCTOR.name());
         var specialisation = getSpecialisationByName(specialisationName);
-        return createDoctorEntity(firstName, lastName, email, role,specialisation);
+        return createDoctorEntity(firstName, lastName, email,imageUrl, role,specialisation);
     }
 }

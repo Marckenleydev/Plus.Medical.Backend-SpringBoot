@@ -3,17 +3,16 @@ spring :
   profiles:
     active: ${ACTIVE_PROFILE:dev}
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://root:MqyxActyfqlhSEGhUFFCMtbBOIyesbtm@junction.proxy.rlwy.net:19565/railway
-
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRESQL_HOST}/plus_medical
     username: root
-    password: MqyxActyfqlhSEGhUFFCMtbBOIyesbtm
+    password: ${POSTGRESQL_PASSWORD}
   jpa:
     open-in-view: false
     hibernate:
       ddl-auto: update
-      database: mysql
-      database-platform: org.hibernate.dialect.MySQLDialect
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
       show-sql: true
 
 
@@ -47,7 +46,7 @@ spring :
       host: ${VERIFY_EMAIL_HOST}
 
 server:
-  #port: ${CONTAINER_PORT}
+  port: ${PORT}
   error:
     path: /user/error
     whitelabel:
@@ -58,3 +57,7 @@ jwt:
   secret: ${JWT_SECRET}
 
 
+cloudinary:
+  cloud_name: dt6mlfety
+  api_key: 181787623784263
+  api_secret: icYbD9yECU8zuWRNEUkEHgyYRnY

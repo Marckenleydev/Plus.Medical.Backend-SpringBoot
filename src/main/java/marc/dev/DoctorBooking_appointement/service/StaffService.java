@@ -7,7 +7,7 @@ import marc.dev.DoctorBooking_appointement.enumeration.LoginType;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface StaffService {
-    void createStaff(String firstName, String lastName, String email, String password);
+    void createStaff(String firstName, String lastName, String email, String password, MultipartFile imageUrl);
     RoleEntity getRoleName(String name);
     void verifyAccount(String token);
     void updateLoginAttempt(String email, LoginType loginType);

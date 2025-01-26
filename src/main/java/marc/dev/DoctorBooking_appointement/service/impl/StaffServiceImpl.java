@@ -12,6 +12,7 @@ import marc.dev.DoctorBooking_appointement.enumeration.LoginType;
 import marc.dev.DoctorBooking_appointement.event.StaffEvent;
 import marc.dev.DoctorBooking_appointement.exception.ApiException;
 import marc.dev.DoctorBooking_appointement.repository.*;
+import marc.dev.DoctorBooking_appointement.service.CloudinaryService;
 import marc.dev.DoctorBooking_appointement.service.StaffService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,17 +40,21 @@ public class StaffServiceImpl implements StaffService {
     private final BCryptPasswordEncoder encoder;
     private final CacheStore<String, Integer> userCache;
     private final ApplicationEventPublisher publisher;
+    private final CloudinaryService cloudinaryService;
 
 
     @Override
-    public void createStaff(String firstName, String lastName, String email, String password) {
+    public void createStaff(String firstName, String lastName, String email, String password, MultipartFile StaffImageUrl) {
         var staff = staffRepository.findByEmailIgnoreCase(email);
 
         if(staff.isPresent()){
             throw new ApiException("Email already exists. Use a different email and try again");
         }
+        String imageUrl = cloudinaryService.uploadFile(StaffImageUrl, "Plus-Medical-Images");
 
-        var staffEntity = staffRepository.save(createNewStaff(firstName, lastName, email));
+
+
+        var staffEntity = staffRepository.save(createNewStaff(firstName, lastName, email,imageUrl));
         var credentialEntity = new CredentialEntity(staffEntity, encoder.encode(password));
         credentialRepository.save(credentialEntity);
 
@@ -223,8 +228,8 @@ public class StaffServiceImpl implements StaffService {
         return staffByEmail.orElseThrow(() -> new ApiException("User not found"));
     }
 
-    private StaffEntity createNewStaff(String firstName, String lastName, String email){
+    private StaffEntity createNewStaff(String firstName, String lastName, String email, String imageUrl){
         var role = getRoleName(Authority.STAFF.name());
-        return createStaffEntity(firstName, lastName, email, role);
+        return createStaffEntity(firstName, lastName, email,imageUrl,  role);
     }
 }

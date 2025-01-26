@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import marc.dev.DoctorBooking_appointement.entity.SpecialisationEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -23,4 +24,5 @@ public class UserRequest {
     private String phone;
     private String medical_history;
     private String specialisation;
+    private MultipartFile imageUrl;
 }

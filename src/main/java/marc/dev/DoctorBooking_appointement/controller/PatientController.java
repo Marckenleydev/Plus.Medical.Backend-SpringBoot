@@ -36,9 +36,9 @@ public class PatientController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Response> savePatient(@RequestBody @Valid UserRequest user, HttpServletRequest request) {
+    public ResponseEntity<Response> savePatient(@ModelAttribute @Valid UserRequest user, HttpServletRequest request) {
 
-        patientService.createPatient(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        patientService.createPatient(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getImageUrl());
 
 
         return ResponseEntity.created(getUri()).body(getResponse(request, emptyMap(), "Check your email to enable your account.", CREATED));

@@ -32,8 +32,8 @@ public class DoctorController {
     private final ApiLogoutHandler apiLogoutHandler;
 
     @PostMapping("/register")
-    public ResponseEntity<Response> saveDoctor(@RequestBody @Valid UserRequest user, HttpServletRequest request) {
-        doctorService.createDoctor(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getSpecialisation());
+    public ResponseEntity<Response> saveDoctor(@ModelAttribute @Valid UserRequest user, HttpServletRequest request) {
+        doctorService.createDoctor(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getSpecialisation(),user.getImageUrl());
         return ResponseEntity.created(getUri()).body(getResponse(request, emptyMap(), "Account created. Check your email to enable your account.", CREATED));
     }
 
