@@ -101,7 +101,7 @@ public class JwtServiceImpl extends JwtConfiguration implements JwtService {
                 var cookie = new Cookie(type.getValue(), accessToken);
                 cookie.setHttpOnly(true);
                 cookie.setSecure(true);
-                cookie.setMaxAge(2 * 60);
+                cookie.setMaxAge(2 * 60 * 60);
                 cookie.setPath("/");
                 cookie.setAttribute("SameSite", NONE.name());
                 response.addCookie(cookie);
